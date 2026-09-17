@@ -3,6 +3,16 @@
 
 @namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
+/* Focus ring
+ * Adwaita draws focus as a 2px ring of the accent colour at 50% alpha.
+ * Overriding Firefox's own focus tokens covers every widget at once
+ * instead of restyling each one. */
+:root {
+	--focus-outline-color: var(--gnome-focus-border-color) !important;
+	--focus-outline-width: 2px !important;
+	--focus-outline: var(--focus-outline-width) solid var(--focus-outline-color) !important;
+}
+
 /* Checkbox */
 input[type="checkbox"],
 checkbox:not(.treenode-checkbox) > .checkbox-check {
