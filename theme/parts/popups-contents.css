@@ -16,16 +16,11 @@
 		& > #appMenu-fxa-label {
 			padding-left: 22px !important;
 			margin-inline-start: -22px !important;
-		}
-		
-		& > #appMenu-fxa-avatar {
-			margin-inline-start: 5px !important;
-		}
-	}
+		}	}
 }
 
 #appMenu-fxa-status2 {
-	margin: var(--arrowpanel-menuitem-margin) !important;
+	margin: var(--menuitem-margin) !important;
 	
 	&[fxastatus] > #appMenu-fxa-label2 > vbox > #appMenu-header-description, #appMenu-fxa-text {
 		font-weight: 400 !important;

@@ -108,8 +108,8 @@ findbar:-moz-window-inactive description,
 	}
 
 	notification-message {
-		--banner-color: #7d7d83;
-		background-color: color-mix(in srgb, var(--banner-color) 30%, var(--gnome-window-background)) !important;
+		--gnome-banner-color: #7d7d83;
+		background-color: color-mix(in srgb, var(--gnome-banner-color) 30%, var(--gnome-window-background)) !important;
 		border: 0 !important;
 		border-top: 1px solid var(--gnome-toolbar-border-color) !important;
 		border-radius: 0 !important;
@@ -117,10 +117,10 @@ findbar:-moz-window-inactive description,
 		margin: 0 !important;
 
 		&[type="warning"] {
-			--banner-color: var(--gnome-warning-bg);
+			--gnome-banner-color: var(--gnome-warning-bg);
 		}
 		&[type="critical"] {
-			--banner-color: var(--gnome-error-bg);
+			--gnome-banner-color: var(--gnome-error-bg);
 		}
 
 		&[style*="margin-top"] {
@@ -164,7 +164,6 @@ link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container {
 #PersonalToolbar {
 	padding: var(--gnome-toolbar-padding) !important;
 	padding-top: 0 !important;
-	--bookmarks-toolbar-overlapping-browser-height: auto;
 }
 #PlacesToolbar toolbarseparator {
 	border-top: 0 !important;

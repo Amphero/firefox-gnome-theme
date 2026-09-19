@@ -97,12 +97,6 @@ button.close::before {
 		fill-opacity: 1 !important;
 		opacity: .3;
 	}
-	.menu-right {
-		-moz-appearance: none !important;
-		list-style-image: var(--gnome-icon-go-next-symbolic) !important;
-		width: 16px !important;
-		height: 16px !important;
-	}
 	#identity-popup-mainView .subviewbutton-nav::after,
 	.widget-overflow-list .subviewbutton-nav::after,
 	.PanelUI-subView .subviewbutton-nav::after,
@@ -156,11 +150,6 @@ button.close::before {
 	.searchbar-search-icon,
 	.textbox-search-sign {
 		list-style-image: url(../icons/edit-find-symbolic.svg) !important;
-	}
-	.textbox-search-sign {
-		margin: 3px 0;
-		max-height: 16px !important;
-		width: 16px !important;
 	}
 
 	/* Findbar */
@@ -480,19 +469,10 @@ button.close::before {
 	}
 	/* Cut button */
 	#cut-button,
-	#appMenu-cut-button {
-		list-style-image: var(--gnome-icon-edit-cut-symbolic) !important;
-	}
 	/* Copy button */
 	#copy-button,
-	#appMenu-copy-button {
-		list-style-image: var(--gnome-icon-edit-copy-symbolic) !important;
-	}
 	/* Paste button */
 	#paste-button,
-	#appMenu-paste-button {
-		list-style-image: var(--gnome-icon-edit-paste-symbolic) !important;
-	}
 	/* Overflow button */
 	#nav-bar-overflow-button {
 		list-style-image: var(--gnome-icon-pan-down-symbolic) !important;

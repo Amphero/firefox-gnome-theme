@@ -196,9 +196,6 @@ toolbarspring {
 }
 
 /* URL bar and Search bar */
-#urlbar[focused] .urlbar-textbox-container {
-	margin: -1px !important;
-}
 #searchbar > .searchbar-textbox[focused] .searchbar-search-button {
 	margin-left: -1px !important;
 }
