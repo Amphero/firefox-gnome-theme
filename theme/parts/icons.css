@@ -338,7 +338,7 @@ button.close::before {
 		list-style-image: var(--gnome-icon-preferences-desktop-locale-symbolic) !important;
 	}
 	#screenshot-button {
-		list-style-image: var(--gnome-icon-screenshot-symbolic) !important;
+		list-style-image: var(--gnome-icon-camera-photo-symbolic) !important;
 	}
 	#library-button {
 		list-style-image: var(--gnome-icon-view-list-symbolic) !important;
