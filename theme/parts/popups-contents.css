@@ -112,6 +112,16 @@
 }
 
 /* Customization overflow menu position */
+/* Firefox paints the account promo in its own purple */
+#appMenu-fxa-sign-in-promo {
+	background-color: var(--gnome-card-background) !important;
+	color: inherit !important;
+
+	& * {
+		color: inherit !important;
+	}
+}
+
 #customization-container {
 	background-color: var(--gnome-window-background) !important;
 }
