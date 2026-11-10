@@ -180,7 +180,12 @@ HEX_TO_RGBA() {
     echo "rgba($r, $g, $b, 0.8)"
 }
 
-write_colors_to_custom_css() {
+CSS_FILE="$THEME_DIR/customChrome.css"
+BLOCK_BEGIN="/* autothemer: begin */"
+BLOCK_END="/* autothemer: end */"
+COLORS_CSS=""
+
+add_colors() {
     local mode="$1"
     local bg="$2"
     local text="$3"
@@ -188,39 +193,44 @@ write_colors_to_custom_css() {
     local sidebar="$5"
     local view="$6"
     local backdrop_bg="$7"
-    
-    local css_file="$THEME_DIR/customChrome.css"
-    TEXT_RGBA=$(HEX_TO_RGBA "$text")
-    
-    if [[ "$mode" == "light" ]]; then
-        cat > "$css_file" << EOF
-@namespace xul url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-:root {
-	--gnome-window-background: $bg;
+    TEXT_RGBA=$(HEX_TO_RGBA "$text")
+
+    local vars="--gnome-window-background: $bg;
 	--gnome-window-color: $TEXT_RGBA;
 	--gnome-view-background: $view;
 	--gnome-sidebar-background: $sidebar;
 	--gnome-headerbar-background: $bg;
-	--gnome-secondary-sidebar-background: $backdrop_bg;
+	--gnome-secondary-sidebar-background: $backdrop_bg;"
+
+    if [[ "$mode" == "light" ]]; then
+        COLORS_CSS+=":root {
+	$vars
 }
-EOF
+"
     else
-        cat >> "$css_file" << EOF
-@media (prefers-color-scheme: dark) {
+        COLORS_CSS+="@media (prefers-color-scheme: dark) {
 	:root {
-		--gnome-window-background: $bg;
-		--gnome-window-color: $TEXT_RGBA;
-		--gnome-view-background: $view;
-		--gnome-sidebar-background: $sidebar;
-		--gnome-headerbar-background: $bg;
-		--gnome-secondary-sidebar-background: $backdrop_bg;
+		${vars//$'\n'/$'\n\t'}
 	}
 }
-EOF
+"
     fi
+    echo "Prepared $mode colors"
+}
 
-    echo "Applied $mode colors to: $css_file"
+# customChrome.css belongs to the user: only replace our own block in it
+write_custom_css() {
+    local rest=""
+    if [[ -f "$CSS_FILE" ]]; then
+        rest=$(awk -v b="$BLOCK_BEGIN" -v e="$BLOCK_END" \
+            '$0 == b { skip = 1; next } $0 == e { skip = 0; next } !skip' "$CSS_FILE")
+    fi
+    {
+        [[ -n "$rest" ]] && printf '%s\n\n' "$rest"
+        printf '%s\n%s%s\n' "$BLOCK_BEGIN" "$COLORS_CSS" "$BLOCK_END"
+    } > "$CSS_FILE.tmp" && mv "$CSS_FILE.tmp" "$CSS_FILE"
+    echo "Applied colors to: $CSS_FILE"
 }
 
 echo "Theme: $GTK_THEME"
@@ -239,7 +249,7 @@ if [[ -n "$LIGHT_THEME" ]]; then
     echo "  Sidebar:   $SIDEBAR_L"
     echo "  Backdrop:  $BACKDROP_BG_L"
     echo ""
-    write_colors_to_custom_css "light" "$BG_L" "$TEXT_L" "$ACCENT_L" "$SIDEBAR_L" "$VIEW_L" "$BACKDROP_BG_L"
+    add_colors "light" "$BG_L" "$TEXT_L" "$ACCENT_L" "$SIDEBAR_L" "$VIEW_L" "$BACKDROP_BG_L"
 fi
 
 if [[ -n "$DARK_THEME" ]]; then
@@ -252,7 +262,9 @@ if [[ -n "$DARK_THEME" ]]; then
     echo "  Sidebar:   $SIDEBAR_D"
     echo "  Backdrop:  $BACKDROP_BG_D"
     echo ""
-    write_colors_to_custom_css "dark" "$BG_D" "$TEXT_D" "$ACCENT_D" "$SIDEBAR_D" "$VIEW_D" "$BACKDROP_BG_D"
+    add_colors "dark" "$BG_D" "$TEXT_D" "$ACCENT_D" "$SIDEBAR_D" "$VIEW_D" "$BACKDROP_BG_D"
 fi
+
+write_custom_css
 
 echo "Done! Restart Firefox to see changes."
