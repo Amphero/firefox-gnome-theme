@@ -196,6 +196,24 @@ button.close::before {
 	treechildren::-moz-tree-image(query, OrganizerQuery_history____v) {
 		list-style-image: var(--gnome-icon-preferences-system-time-symbolic) !important;
 	}
+	/* The history sidebar's CSP only allows chrome: images, the data: icons
+	 * above don't load there */
+	#historyTree > treechildren::-moz-tree-twisty {
+		list-style-image: url("chrome://global/skin/icons/arrow-right.svg") !important;
+	}
+	#historyTree > treechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(closed) {
+		list-style-image: url("chrome://global/skin/icons/arrow-left.svg") !important;
+	}
+	#historyTree > treechildren::-moz-tree-twisty(open) {
+		list-style-image: url("chrome://global/skin/icons/arrow-down.svg") !important;
+	}
+	#historyTree > treechildren::-moz-tree-image(title, container),
+	#historyTree > treechildren::-moz-tree-image(title, open) {
+		list-style-image: url("chrome://global/skin/icons/folder.svg") !important;
+	}
+	#historyTree > treechildren::-moz-tree-image(title, query, dayContainer) {
+		list-style-image: url("chrome://browser/skin/history.svg") !important;
+	}
 
 	/* Menu checkbox/radio */
 	menuitem[type="checkbox"], menuitem[type="radio"] {
