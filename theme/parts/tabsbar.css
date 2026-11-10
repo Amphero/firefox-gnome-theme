@@ -1069,6 +1069,10 @@ tab-group {
 			visibility: collapse;
 		}		
 	}
+	/* Private windows put their indicator next to the tab strip, it would keep the bar open */
+	#TabsToolbar:not(:has(tab[pinned]:not([hidden]), tab-group, tab:not([hidden]) ~ tab:not([hidden]))) .private-browsing-indicator-button {
+		visibility: collapse;
+	}
 }
 
 /* OPTIONAL: Use tabs as headerbar */
