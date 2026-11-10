@@ -157,6 +157,11 @@ link[href="chrome://global/content/elements/moz-input-common.css"] ~ * #input:no
 	padding-inline-start: 0 !important;
 	
 }
+/* The results view is only as wide as the input container, the end
+ * padding goes there (urlbar.css) so the view lines up with the focus ring */
+#urlbar {
+	padding-inline-end: 0 !important;
+}
 .searchbar-textbox {
 	border: 0 !important;
 	padding: 0 !important;

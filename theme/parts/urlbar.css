@@ -49,6 +49,7 @@ toolbarspring {
 	
 	.urlbar-input-container {
 		padding: 0 !important;
+		padding-inline-end: 3px !important;
 		/* 157 draws its own focus ring here while the view is open, on top of
 		 * the one we put on #urlbar */
 		outline: 0 !important;
